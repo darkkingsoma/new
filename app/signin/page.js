@@ -1,17 +1,15 @@
 'use client';
 
-import { useState, Suspense } from 'react';
+import { useState } from 'react';
 import { signIn } from 'next-auth/react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 
-function SignInForm() {
+function SignInForm({ callbackUrl = '/' }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const callbackUrl = searchParams.get('callbackUrl') || '/';
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -94,10 +92,15 @@ function SignInForm() {
   );
 }
 
+// Client component to handle search params
+'use client';
+function SignInWithParams() {
+  const searchParams = useSearchParams();
+  const callbackUrl = searchParams.get('callbackUrl') || '/';
+  return <SignInForm callbackUrl={callbackUrl} />;
+}
+
+// Server component
 export default function SignInPage() {
-  return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <SignInForm />
-    </Suspense>
-  );
+  return <SignInWithParams />;
 }
