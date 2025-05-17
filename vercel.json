@@ -5,6 +5,12 @@
   "installCommand": "npm install",
   "framework": "nextjs",
   "regions": ["hnd1"],
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/next"
+    }
+  ],
   "env": {
     "NEXTAUTH_URL": "https://new-darkkingsoma.vercel.app",
     "NEXTAUTH_SECRET": "@nextauth_secret"
