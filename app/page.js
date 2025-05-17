@@ -2,7 +2,7 @@
 
 import { Suspense } from 'react';
 import { getServerSession } from 'next-auth';
-import { authOptions } from './api/auth/[...nextauth]/route';
+import { authOptions } from './api/auth/auth.config';
 import ClientWrapper from './components/ClientWrapper';
 
 // Main page component
